@@ -3,3 +3,30 @@
 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+import java.lang.Math;
+
+class Solution {
+    int[] answer = new int[2];
+
+    
+    public int gcd(int a, int b){ //유클리드 호제법
+        if(a % b == 0){
+            return b;
+        }
+        return gcd(b, a%b);
+    }
+    
+    public int[] solution(int numer1, int denom1, int numer2, int denom2) {
+        int numer3 = (numer1 * denom2) + (numer2 * denom1);
+        int denom3 = denom1 * denom2;
+        
+        int num = gcd(numer3, denom3);
+        answer[0] = numer3 / num;
+        answer[1] = denom3 / num;
+        
+            
+        return answer;
+    }
+}
+
+유클리드 호제법을 사용한 풀이
