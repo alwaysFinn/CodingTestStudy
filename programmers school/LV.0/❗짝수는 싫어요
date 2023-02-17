@@ -3,13 +3,22 @@
 --------------------------------------------------------------------------------------------------------------------
 class Solution {
     public int[] solution(int n) {
-        int[] input = new int[n];
+        //수가 짝수이면 나누기 2, 홀수이면 나누기 2 + 1임을 설정
+        int len = 0;
         int[] answer = {};
+        if(n % 2 == 0){
+            answer = new int[n / 2];
+        }else{
+            answer = new int[n / 2 + 1];
+        }
+        //짝수인지 홀수인지를 계산해서 위에서 길이를 지정한 배열에 담음
         for(int i = 0; i <= n; i ++){
-            if(i % 2 == 0){
-                answer[i] = i;
+            if(i % 2 != 0){
+                answer[len] = i;
+                len++;
             }
         }
+        
         return answer;
     }
 }
