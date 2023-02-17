@@ -8,3 +8,29 @@
 위 작업을 몇 번이나 반복해야 하는지 반환하는 함수, solution을 완성해 주세요. 
 단, 주어진 수가 1인 경우에는 0을, 작업을 500번 반복할 때까지 1이 되지 않는다면 –1을 반환해 주세요.
 -----------------------------------------------------------------------------------------------------------------------------
+class Solution {
+    public int solution(int num) {
+        int answer = 0;
+        if(num != 1){
+            while(true){
+                if(num == 1){
+                    break;
+                }else if(num % 2 == 0){
+                    num = num / 2;
+                    answer ++;
+                }else if(num % 2 != 0){
+                    num = num * 3 + 1;
+                    answer ++;
+                }else if(answer >= 500){
+                    answer = -1;
+                    break;
+                }else {
+                    return answer;
+                }
+            }
+        }
+        return answer;
+    }
+}
+
+n이 626331인 경우 answer 값이 -1이 나와야 하지만 자꾸 488나옴
