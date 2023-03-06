@@ -7,16 +7,13 @@ class Solution {
     public int solution(int order) {
         int answer = 0;
         String value = Integer.toString(order);
-            if(value.contains("3")){
+        String[] ans;
+        ans = value.split("");
+        for(int i = 0; i < ans.length; i++){
+            if(ans[i].contains("3") || ans[i].contains("6") || ans[i].contains("9"))
                 answer++;
-            }
-            if(value.contains("6")){
-                answer++;
-            }
-            if(value.contains("9")){
-                answer++;
-            }
-        
+        }
+            
         return answer;
     }
 }
