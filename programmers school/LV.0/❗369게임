@@ -6,13 +6,17 @@
 class Solution {
     public int solution(int order) {
         int answer = 0;
-        if(order % 3 == 0){
-            answer++;
-        }else if(order % 6 == 0){
-            answer++;
-        }else if(order % 9 == 0){
-            answer++;
-        }
+        String value = Integer.toString(order);
+            if(value.contains("3")){
+                answer++;
+            }
+            if(value.contains("6")){
+                answer++;
+            }
+            if(value.contains("9")){
+                answer++;
+            }
+        
         return answer;
     }
 }
