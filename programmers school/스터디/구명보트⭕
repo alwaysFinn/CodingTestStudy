@@ -7,45 +7,28 @@
 
 사람들의 몸무게를 담은 배열 people과 구명보트의 무게 제한 limit가 매개변수로 주어질 때, 모든 사람을 구출하기 위해 필요한 구명보트 개수의 최솟값을 return 하도록 solution 함수를 작성해주세요.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-import java.util.*;
-
+import java.util.Arrays;
 
 class Solution {
     public int solution(int[] people, int limit) {
-        Arrays.sort(people); //배열 내림차순 정렬
         int answer = 0;
-        
-        ArrayList<Integer> arr = new ArrayList<Integer>(4);
-        
-        for(int i = 0; i < people.length; i++){
-            arr.add(people[i]);
-        }//여기까지 array -> arraylist 변환과정
-        
-        int j = 0;
-        while(true){
-            
-            if(arr.size() == 0) break;
-            
-            if(arr.size() == 1){
-                arr.remove(j);
-                answer++;
-            }else if(arr.get(j) + arr.get(j+1) <= limit){
-                arr.remove(j);
-                arr.remove(j+1);
-                answer++;
-            }else if(arr.get(j) > limit){
-                arr.remove(j);
-                answer++;
+
+        Arrays.sort(people); // 배열 정렬
+
+        int right = people.length - 1; // 가장 무거운 사람
+        int left = 0; // 가장 가벼운 사람
+
+        while (right >= left) { // 둘의 무게가 같지 않다는 조건
+            int weight = people[right--]; //무거운 사람 제거
+            if (weight + people[left] <= limit) { // 가장 무거운 사람과 가벼운 사람이 탈 수 있다면
+              left++; // 둘 다 제거
             }
-            
-            
-        }
+            answer++; // 보트 한대 떠남
+          }
+
         return answer;
     }
 }
-
-
-※ 시간 초과 이슈
 
 
 https://school.programmers.co.kr/learn/courses/30/lessons/42885
