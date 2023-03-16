@@ -13,26 +13,39 @@ import java.util.*;
 class Solution {
     public int solution(int[] people, int limit) {
         Arrays.sort(people); //배열 내림차순 정렬
-        
-        //List al = Arrays.asList(people);
-        
-        
-        int i = 0;
-        while(al.length != 0){
-            if(al.get(i) + al.get(i+1) <= limit){
-                al.remove(al[i]);
-                al.remove(al[i+1]);
-                i++;
-            }
-        }
-    
-        
         int answer = 0;
+        
+        ArrayList<Integer> arr = new ArrayList<Integer>(4);
+        
+        for(int i = 0; i < people.length; i++){
+            arr.add(people[i]);
+        }//여기까지 array -> arraylist 변환과정
+        
+        int j = 0;
+        while(true){
+            
+            if(arr.size() == 0) break;
+            
+            if(arr.size() == 1){
+                arr.remove(j);
+                answer++;
+            }else if(arr.get(j) + arr.get(j+1) <= limit){
+                arr.remove(j);
+                arr.remove(j+1);
+                answer++;
+            }else if(arr.get(j) > limit){
+                arr.remove(j);
+                answer++;
+            }
+            
+            
+        }
         return answer;
     }
 }
 
 
+※ 시간 초과 이슈
 
 
 https://school.programmers.co.kr/learn/courses/30/lessons/42885
