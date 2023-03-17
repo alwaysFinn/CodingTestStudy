@@ -1,9 +1,24 @@
 # 최소 직사각형
 설명 생략
 --------------------------------------------------
+import java.util.Arrays;
 
-
-
-
-
-https://school.programmers.co.kr/learn/courses/30/lessons/86491
+class Solution {
+    public int solution(int[][] sizes) {
+        
+        
+        int[] horizontal = new int[sizes.length]; // 최솟값들의 집합
+        int[] vertical = new int[sizes.length]; // 최댓값들의 집합
+        
+        for (int i = 0; i < sizes.length; i++){
+            horizontal[i] = Math.min(sizes[i][0], sizes[i][1]); //최솟값들을 담고
+            vertical[i] = Math.max(sizes[i][0], sizes[i][1]); //최댓값들을 담음
+        }
+        
+        Arrays.sort(horizontal); // 추린 집합들 중 최댓값을 구하기 위해
+        Arrays.sort(vertical); // 추린 집합ㄷ르 중 최댓값을 구함
+        
+        //가장 마지막에 있는 번호가 최댓값이므로 곱하면 최소 직사각형
+        return horizontal[sizes.length-1] * vertical[sizes.length-1];
+    }
+}
