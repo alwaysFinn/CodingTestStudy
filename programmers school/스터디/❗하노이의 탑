@@ -10,5 +10,29 @@
 1번 기둥에 있는 원판의 개수 n이 매개변수로 주어질 때, n개의 원판을 3번 원판으로 최소로 옮기는 방법을 return하는 solution를 완성해주세요.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
+import java.util.Arrays;
+
+class Solution {
+    public int[][] solution(int n) {
+        int[][] answer = new int[n+(n-1)][2];
+        
+        int a = answer.length;
+        
+        answer[0][0] = answer.length;
+        answer[0][1] = answer[0].length;
+        
+        for(int i = 1; i <= n+(n-1); i++){
+            for(int j = 1; j <= 2; j++){
+                //answer[i][j] = 
+            }
+        }
+        
+        return answer;
+    }
+}
+
+미완
+
+
 
 https://school.programmers.co.kr/learn/courses/30/lessons/12946
