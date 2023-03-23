@@ -2,4 +2,11 @@
 설명 생략
 ---------------------------------------------------
 
+class Solution {
+    public int[] solution(String[] id_list, String[] report, int k) {
+        int[] answer = {};
+        return answer;
+    }
+}
+
 https://school.programmers.co.kr/learn/courses/30/lessons/92334
