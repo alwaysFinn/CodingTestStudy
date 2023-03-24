@@ -1,12 +1,46 @@
 # 신고 결과 받기
 설명 생략
 ---------------------------------------------------
+import java.util.*;
 
 class Solution {
     public int[] solution(String[] id_list, String[] report, int k) {
-        int[] answer = {};
+        
+        int[] answer = new int[id_list.length];// 답 = 이용자 수 
+
+        //중복값 제거를 위해 값 입력 및 삭제가 용이한 ArrayList로 변환
+        ArrayList<String> areport = new ArrayList<>(Arrays.asList(report));
+        //중복된 값들 제거
+        //ArrayList로 바꾸고 첫번째 행부터 비교해서 같으면 지우는 방식
+        for(int i = 0; i < areport.size()-1; i++){
+            for(int j = i+1; j < areport.size(); j++){
+                if(areport.get(i).equals(areport.get(j)) == true){
+                	areport.remove(j);
+                }
+            }
+        }
+        // 중복된 신고 결과 제거 완료
+        // 이제 각 피신고자의 신고당한 횟수 count
+        
+        // 짝수와 홀수로 신고자, 피신고자를 꼭 분류해야 하는가
+        // 피 신고자의 신고당한 횟수를 count해야 하는 부분인데
+        // 현재로써는 한 인덱스 안에 모두 들어가있으므로 
+        
+        
+        // 결국 중요한 것은 본인이 신고한 사람이 n번보다 많이 신고당했을 경우 
+        // 본인에게 메일이 와야한다는 점.
+        // 본인을 어떻게 특정할 것인지
+        
+        // 짝수 = 신고자, 홀수 = 피신고자
+        String[] reportlist = new String[report.length*2]; 
+        for(int i = 0; i < report.length; i++){
+            reportlist = report[i].split(" ");
+        }
+        
+   
+        
+        
         return answer;
     }
 }
-
 https://school.programmers.co.kr/learn/courses/30/lessons/92334
