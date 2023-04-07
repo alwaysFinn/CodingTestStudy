@@ -1,0 +1,37 @@
+# 한 번만 등장한 문자
+문자열 s가 매개변수로 주어집니다. 
+s에서 한 번만 등장하는 문자를 사전 순으로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요. 
+한 번만 등장하는 문자가 없을 경우 빈 문자열을 return 합니다.
+
+------------------------------------------------------------------------------------------------
+import java.util.*;
+
+class Solution {
+    public String solution(String s) {
+        String answer = "";
+        int cnt = 0;
+        
+        String[] ans = s.split("");
+        Arrays.sort(ans);
+        
+        for(int i = 0; i < ans.length; i++) {
+            cnt = 0;
+        	for(int j = 0; j < ans.length; j++) {
+        		if(ans[i].equals(ans[j])) {
+        			cnt++;
+        		}
+        	}
+        	if(cnt == 1) {
+        		answer += ans[i];
+        	}
+            
+        }
+        
+        return answer;
+    }
+}
+
+
+
+cnt를 1이 아닌 0으로 해서 두시간동안 ,,,,,,,,,
+
