@@ -1,1 +1,59 @@
+package june;
+
+import java.util.Date;
+import java.util.Scanner;
+
+/* 계산기 프로그램 
+ * 출생년도를 입력하면
+ * 오늘 날짜까지 며칠을 살았는지 계산하는 기능 제공
+ * 
+ * 스캐너로 생년월일을 입력받고
+ * 31일까지 있는 달이면 + 31
+ * 30일까지 있는 달이면 + 30
+ * 28이면 +28
+ * 29면 + 29
+ * 
+ * for문으로 돌려서 계속 더하고 마지막에 값을 확인
+ * 
+ * 
+*/
+
+public class ageCalc {
+
+	public static void main(String[] args) {
+		
+		System.out.println("생년월일을 입력하세요 yyyymmdd");
+		
+		Scanner scan = new Scanner(System.in);
+		String birth = scan.nextLine();
+		
+		System.out.println("입력하신 날짜 : " + birth);
+		
+		int yy = Integer.parseInt(birth.substring(0,4));
+		System.out.println(yy);
+		
+		Date date = new Date();
+		String today = date.toString();
+		today = today.substring(24, 28);
+		System.out.println(today);
+		
+		int age = 0;
+		
+		for(int i = yy; i <= Integer.parseInt(today); i++) {
+			if(i % 4 == 0) {
+				if(i % 100 == 0) {
+					if(i % 400 == 0) {
+						age += 365;
+					}
+				}
+			}else {
+				age += 366;
+			}
+		}
+		
+		scan.close();
+		System.out.println("age : " + age);
+	}
+
+}
 
