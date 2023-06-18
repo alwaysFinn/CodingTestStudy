@@ -37,23 +37,32 @@ public class ageCalc {
 		today = today.substring(24, 28);
 		System.out.println(today);
 		
+		boolean yn = (Integer.parseInt(today) % 4 == 0 && Integer.parseInt(today) % 100 == 0 && Integer.parseInt(today) % 400 == 0); 
+		
 		int age = 0;
 		
 		for(int i = yy; i <= Integer.parseInt(today); i++) {
-			if(i % 4 == 0) {
-				if(i % 100 == 0) {
-					if(i % 400 == 0) {
+			
+			if(i % 4 == 0) { //윤년 조건 1
+				if(i % 100 == 0) { //윤년 조건 2
+					if(i % 400 == 0) { //윤년 조건 3
+						age += 366;
+					}else {
 						age += 365;
 					}
+				}else {
+					age += 366;
 				}
 			}else {
-				age += 366;
+				age += 365;
 			}
+			
+			System.out.println("i : " + i);
+			System.out.println("age : " + age);
 		}
-		
+		//올해는 지난만큼만 더해야하는 로직 추가 
 		scan.close();
 		System.out.println("age : " + age);
 	}
 
 }
-
