@@ -1,7 +1,13 @@
 package june;
 
+import java.text.DateFormatSymbols;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Date;
 import java.util.Scanner;
+
+import javax.print.attribute.DateTimeSyntax;
 
 /* 계산기 프로그램 
  * 출생년도를 입력하면
@@ -22,26 +28,26 @@ public class ageCalc {
 
 	public static void main(String[] args) {
 		
-		System.out.println("생년월일을 입력하세요 yyyymmdd");
+		YunYear yunYear = new YunYear(); //윤년계산기 return true || false
 		
+		System.out.println("생년월일을 입력하세요 yyyymmdd");
 		Scanner scan = new Scanner(System.in);
 		String birth = scan.nextLine();
-		
 		System.out.println("입력하신 날짜 : " + birth);
 		
-		int yy = Integer.parseInt(birth.substring(0,4));
-		System.out.println(yy);
+		int sy = Integer.parseInt(birth.substring(0,4));//시작년
+		int sm = Integer.parseInt(birth.substring(4,6));//시작달
 		
-		Date date = new Date();
-		String today = date.toString();
-		today = today.substring(24, 28);
-		System.out.println(today);
+		Date date = new Date();//오늘날짜
 		
-		boolean yn = (Integer.parseInt(today) % 4 == 0 && Integer.parseInt(today) % 100 == 0 && Integer.parseInt(today) % 400 == 0); 
+		String today = yunYear.dateFormat(date);//포맷을 yyyymmdd로 변환
+		
+		int ey = Integer.parseInt(today.substring(0,4)); //종료년
+		int em = Integer.parseInt(today.substring(4,6)); //종료년
 		
 		int age = 0;
 		
-		for(int i = yy; i <= Integer.parseInt(today); i++) {
+		for(int i = sy+1; i < ey; i++) {
 			
 			if(i % 4 == 0) { //윤년 조건 1
 				if(i % 100 == 0) { //윤년 조건 2
@@ -56,13 +62,106 @@ public class ageCalc {
 			}else {
 				age += 365;
 			}
-			
-			System.out.println("i : " + i);
-			System.out.println("age : " + age);
 		}
-		//올해는 지난만큼만 더해야하는 로직 추가 
+		
+		if(yunYear.isYunYear(sy)) {
+			age += 366 - yunYear.Cal(birth) +1;
+		}else {
+			age += 365 - yunYear.Cal(birth) +1;
+		}
+		
+		age += yunYear.Cal(today);
 		scan.close();
-		System.out.println("age : " + age);
+		System.out.println("오늘까지 " + age + "일 살았습니다.");
 	}
+	
+}
 
+class YunYear {
+	
+	public String dateFormat(Date date) {
+		String dt = "";
+		String month = "";
+		
+		switch(date.toString().substring(4,7)) {
+			case "Jan": month = "01";
+			break;
+			case "Feb": month = "02";
+			break;
+			case "Mar": month = "03";
+			break;
+			case "Apr": month = "04";
+			break;
+			case "May": month = "05";
+			break;
+			case "Jun": month = "06";
+			break;
+			case "Jul": month = "07";
+			break;
+			case "Aug": month = "08";
+			break;
+			case "Sep": month = "09";
+			break;
+			case "Oct": month = "10";
+			break;
+			case "Nov": month = "11";
+			break;
+			case "Dec": month = "12";
+			break;
+		}
+		
+		dt += date.toString().substring(24, 28);
+		dt += month;
+		dt += date.toString().substring(8,10);
+		
+		return dt;
+	}
+	
+	public  boolean isYunYear(int year){
+		
+		boolean yn;
+		
+		if(year % 4 == 0) { //윤년 조건 1
+			if(year % 100 == 0) { //윤년 조건 2
+				if(year % 400 == 0) { //윤년 조건 3
+					yn = true;
+				}else {
+					yn = false;
+				}
+			}else {
+				yn = true;
+			}
+		}else {
+			yn = false;
+		}
+		
+		return yn;
+	}
+	
+	public int Cal(String  date) {
+		int result = 0;
+		boolean yn = isYunYear(Integer.parseInt(date.substring(0,4)));
+		
+		for(int i = 1; i < Integer.parseInt(date.substring(4,6)); i++) {
+			if(i == 1) result += 31;
+			if(i == 2) {
+				if(yn == true) {
+					result += 29;
+				}else {
+					result += 28;
+				}
+			}
+			if(i == 3) result += 31;
+			if(i == 4) result += 30;
+			if(i == 5) result += 31;
+			if(i == 6) result += 30;
+			if(i == 7) result += 31;
+			if(i == 8) result += 31;
+			if(i == 9) result += 30;
+			if(i == 10) result += 31;
+			if(i == 11) result += 30;
+		}
+		result += Integer.parseInt(date.substring(6,8));
+		return result;
+	}
 }
