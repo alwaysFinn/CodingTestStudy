@@ -37,16 +37,20 @@ public class randomNum {
 		
 		int temp = 0;
 		int result = 0;
-		int[] tempArr = {}; //값들을 넣고 한번에 보여줄 용도의 배열
+		int[] tempArr = new int[num]; //값들을 넣고 한번에 보여줄 용도의 배열
+		String arr = "";
 		for(int i = 0; i < num; i++) {
 			temp = (int) ((Math.random()) * num);
 			System.out.println(temp);
 			
 			result += temp;
+			tempArr[i] += temp;
 		}
-		
-		System.out.println("난수의 총합은 " + result + "입니다.");
+
+		for(int a : tempArr) arr += a + " ";
+		System.out.println("난수는 " + arr + "이 나왔으며, 총합은 " + result + "입니다.");
 		scan.close();
 	}
 
 }
+;
